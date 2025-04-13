@@ -31,9 +31,11 @@ class ZipCode{
         }
         string encodeGroup(int digit){
             string group = "00000";
+            int cnt = 0;
             int values[] = {7, 4, 2, 1, 0};
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 5, cnt < 2; i++)
                 if(digit >= values[i]){
+                    cnt ++;
                     group[i] = '1';
                     digit -= values[i];
                 }
