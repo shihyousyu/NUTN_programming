@@ -31,10 +31,14 @@ int main(){
     BoxOfProduce box(p1, p2, p3);
     box.display();
 
-    int pos;
-    string choice;
-    cin >> pos >> choice;
-    box.setItem(pos, choice);
+    int cnt;
+    cin >> cnt;
+    for(int i = 0; i < cnt; i ++){
+        int pos;
+        string choice;
+        cin >> pos >> choice;
+        box.setItem(pos, choice);
+    }
     box.display();
     
 }
