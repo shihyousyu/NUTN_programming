@@ -15,12 +15,9 @@ class BoxOfProduce {
             box[1] = item2;
             box[2] = item3;
         }
-
         string getItem(int index) const{return box[index];}
-
-        void setItem(int index, const string& newItem){box[index] = newItem;}
-        
-        void displayBox() const{for(string i : box) cout << i << " ";}
+        void setItem(int index, const string& newItem){box[index] = newItem;}    
+        void display() const{for(string i : box) cout << i << " ";}
 };
 
 int main(){
@@ -31,11 +28,17 @@ int main(){
     for(int i = 0; i < 5; i++) getline(file, produceList[i]);
     file.close();
     
-    string p1 = produceList[rand() % 5];
-    string p2 = produceList[rand() % 5];
-    string p3 = produceList[rand() % 5];
     BoxOfProduce box(p1, p2, p3);
+    box.display();
 
-    box.displayBox();
-
+    int cnt;
+    cin >> cnt;
+    for(int i = 0; i < cnt; i ++){
+        int pos;
+        string choice;
+        cin >> pos >> choice;
+        box.setItem(pos, choice);
+    }
+    box.display();
+    
 }
