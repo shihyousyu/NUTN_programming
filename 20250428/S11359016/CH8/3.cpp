@@ -37,8 +37,7 @@ class Complex{
             return ip;
         }
         friend ostream& operator <<(ostream& op, Complex& c){
-            if(c.imaginary >= 0) op << c.real << "+" << fabs(c.imaginary) << "i";
-            else op << c.real << "+" << fabs(c.imaginary) << "i";
+            if(c.imaginary >= 0) op << c.real << (c.imaginary >= 0 ? "+" : "-") << fabs(c.imaginary) << "i";
             return op;
         }
 };
