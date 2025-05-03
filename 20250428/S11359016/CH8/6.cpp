@@ -10,6 +10,7 @@ class MyInteger{
         MyInteger(int n){setNum(n);}
 
         void setNum(int n){
+            num.clear();
             while(n != 0){
                 num.push_back(n % 10);
                 n /= 10;
