@@ -20,11 +20,9 @@ int main(){
                     suffix = word.back() + suffix;
                     word.pop_back();
                 }
-
                 if(isupper(word[0])) word = "Love" + suffix;
                 else word = "love" + suffix;
             }
-
             t.push_back(word);
         }
 
