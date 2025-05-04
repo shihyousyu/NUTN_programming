@@ -17,7 +17,7 @@ class MyInteger{
             }
         }
         
-        int operator [](int index) {return index >= num.size() ? -1 : num[index];}
+        int operator [](int index){return index >= num.size() ? -1 : num[index];}
         friend istream& operator >>(istream& ip, MyInteger n){
             int t;
             ip >> t;
