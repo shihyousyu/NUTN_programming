@@ -22,9 +22,10 @@ class Subscriber{
     		for(int i = 0; i < numChannels; i++) channelList[i] = temp[i];
         }
     public:
-        Subscriber(){}
+        Subscriber() : name(""), numChannels(0), channelList(nullptr){}
         Subscriber(string n){
             name = n;
+            getchar();
             handleChannels();
         }
         Subscriber(const Subscriber& s){
@@ -77,8 +78,8 @@ int main(){
     cout << "Let Subscriber ____ = Subscriber " << a.getName() << ": ";
     cin >> t;
     Subscriber b;
-    b = a;
     b.setName(t);
+    b = a;
     b.outputSubscriber();
     cout << "reset Subscriber " << a.getName();
     a.resetChannels();
