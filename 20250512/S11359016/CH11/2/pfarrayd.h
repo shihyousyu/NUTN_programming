@@ -14,12 +14,12 @@ namespace PFAD{
             ~PFArrayD();
 
             void addElement(double element);
-            bool full() const{return (capacity == used);}
+            bool full() const;
 
-            int getCapacity() const{return capacity;}
-            int getNumberUsed() const{return used;}
+            int getCapacity() const;
+            int getNumberUsed() const;
 
-            void emptyArray(){used = 0;}
+            void emptyArray();
             
             double& operator [](int index);
             PFArrayD& operator =(const PFArrayD& rightSide);
