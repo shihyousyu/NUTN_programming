@@ -22,13 +22,13 @@ class BoxOfProduce {
 
 int main(){
     srand(time(0));
-    string produceList[5];
+    string p[5];
     ifstream file("input.txt");
 
-    for(int i = 0; i < 5; i++) getline(file, produceList[i]);
+    for(int i = 0; i < 5; i++) getline(file, p[i]);
     file.close();
     
-    BoxOfProduce box(p1, p2, p3);
+    BoxOfProduce box(p[1], p[2], p[3]);
     box.display();
 
     int cnt;
