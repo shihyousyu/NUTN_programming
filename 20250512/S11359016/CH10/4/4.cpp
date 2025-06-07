@@ -1,4 +1,7 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 class Subscriber{
