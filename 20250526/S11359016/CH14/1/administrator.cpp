@@ -5,7 +5,6 @@
 using std::string;
 using std::cin;
 using std::cout;
-using std::endl;
 
 namespace SavitchEmployees{
     Administrator::Administrator(){
@@ -30,22 +29,22 @@ namespace SavitchEmployees{
     }
 
     void Administrator::print() const{
-        cout << "\nDATA: " << endl;
-        cout << "\tName: " << getName() << endl;
-        cout << "\tTitle: " << adminTitle << endl;
-        cout << "\tResponsibility: " << responsibility << endl;
-        cout << "\tSupervisor name: " << supervisorName << endl;
+        cout << "\nDATA: \n";
+        cout << "\tName: " << getName() << "\n";
+        cout << "\tTitle: " << adminTitle << "\n";
+        cout << "\tResponsibility: " << responsibility << "\n";
+        cout << "\tSupervisor name: " << supervisorName << "\n";
     }
 
     void Administrator::printCheck(){
         setNetPay(salary);
         cout << "\n________________________________________________\n";
-        cout << "Pay to the order of " << getName( ) << endl;
+        cout << "Pay to the order of " << getName( ) << "\n";
         cout << "The sum of " << getNetPay( ) << " Dollars\n";
         cout << "_________________________________________________\n";
         cout << "Check Stub NOT NEGOTIABLE \n";
-        cout << "Employee Number: " << getSsn( ) << endl;
-        cout << "Salaried Employee (Administrator). Regular Pay: " << salary << endl;
+        cout << "Employee Number: " << getSsn( ) << "\n";
+        cout << "Salaried Employee (Administrator). Regular Pay: " << salary << "\n";
         cout << "_________________________________________________\n";
     }
 
