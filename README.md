@@ -6,3 +6,7 @@
 ### 第二學期: 
     語言: C++
     課本: Walter Savitch, “Absolute C++,” Pearson International Edition, 6th Edition, 2016.
+## 二年級
+### 第一學期:
+    語言: java
+    課本: JAVA How to Program (Early Objects), 11th edition, Paul Deitel and Harvey Deitel, Pearson
