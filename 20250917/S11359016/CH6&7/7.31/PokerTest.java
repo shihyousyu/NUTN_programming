@@ -1,4 +1,4 @@
-public class PokerTest{
++public class PokerTest{
     public static void main(String[] args){
         DeckOfCards deck = new DeckOfCards();
         deck.shuffle();
