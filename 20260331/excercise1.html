@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <script>
+            var userName = prompt("請輸入你的名字：", "");
+
+            var now = new Date();
+            var hour = now.getHours();
+
+            var greetingText;
+            var textColor;
+            var bgColor;
+
+            if (hour >= 0 && hour < 12) {
+                greetingText = "Good Morning";
+                textColor = "red";
+                bgColor = "yellow";
+            }
+            else if (hour >= 12 && hour < 18) {
+                greetingText = "Good Afternoon";
+                textColor = "blue";
+                bgColor = "white";
+            }
+            else {
+                greetingText = "Good Evening";
+                textColor = "green";
+                bgColor = "black";
+            }
+
+            document.body.bgColor = bgColor;
+
+            document.write("<font color='" + textColor + "' size='10'>");
+            document.write(greetingText + "，" + userName);
+            document.write("</font>");
+        </script>
+    </body>
+</html>

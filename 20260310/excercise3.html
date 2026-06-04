@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Forms</title>
+    </head>
+
+    <body>
+        <form method="post" action="https://120.114.190.22/web_course/get_post.php">
+            <h1 align="center">教科書預定系統</h1>
+            <p>姓名：<input type="text" name="username"></p>
+            <p>寢室分機：<input type="text" name="phone"></p>
+            <p>選擇書籍：</p>
+            <ol>
+                <li><input type="checkbox" name="book" value="book1"> Internet &amp; World Wide Web: How to Program</li>
+                <li><input type="checkbox" name="book" value="book2"> Visual C# 2010: How to Program</li>
+                <li><input type="checkbox" name="book" value="book3"> Data Structure</li>
+            </ol>
+            <p>付款方式：</p>
+            <ol>
+                <li><input type="radio" name="pay" value="cash"> Cash</li>
+                <li><input type="radio" name="pay" value="check"> Check</li>
+                <li>
+                    <i>信用卡：</i>
+                    <ul>
+                        <li><input type="radio" name="pay" value="master"> Mastercard</li>
+                        <li><input type="radio" name="pay" value="visa"> Visa</li>
+                        <li><input type="radio" name="pay" value="amex"> American Express</li>
+                    </ul>
+                </li>
+            </ol>
+            <p>確認訂單，請按下此按鈕 <input type="submit" value="確認訂單"></p>
+        </form>
+    </body>
+</html>

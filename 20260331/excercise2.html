@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <script>
+            var answer = Math.floor(Math.random() * 100) + 1;
+            var win = false;
+
+            for (var i = 1; i <= 3; i++) {
+                var guess = parseInt(prompt("猜 1~100 數字（第 " + i + "/3 次）：", ""));
+
+                if (guess === answer) {
+                    alert("Bingo!");
+                    win = true;
+                    break;
+                }
+                else if (guess < answer) {
+                    alert("請增大數字!");
+                }
+                else {
+                    alert("請減小數字!");
+                }
+            }
+
+            if (!win) {
+                alert("遊戲結束！答案是 " + answer);
+            }
+        </script>
+    </body>
+</html>

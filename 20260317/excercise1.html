@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>練習HTML5的各式輸入</title>
+    </head>
+
+    <body>
+        <form action="https://120.114.190.22/web_course/get_post.php" method="post">
+            <h1>個人資訊調查</h1>
+            <p>統計截止日期：3/15</p>
+            <p>姓名：<input type="text" name="username" placeholder="王小明" required> (必填)</p>
+            <p>學號：<input type="text" name="sid" placeholder="B0000000"></p>
+            <p>出生日期：<input type="date" name="birthday"> (yyyy-mm-dd)</p>
+            <p>家庭成員(數)：<input type="number" name="members" min="0" max="5" value="1">(Enter a number between 0 and 5)</p>
+            <p>平均成績：0 <input type="range" name="score" min="0" max="100"> 100</p>
+            <p>聯絡方式：<input type="tel" name="phone" placeholder="(##) ###-####"> (##) ###-####</p>
+            <p>聯絡信箱：<input type="email" name="email" placeholder="name@domain.com"> (name@domain.com)</p>
+            <p>個人網頁：<input type="url" name="homepage" placeholder="http://www.domainname.com">(http://www.domainname.com)</p>
+            <p>幸運顏色：<input type="color" name="color"> (Hexadecimal code such as #ADD8E6)</p>
+            <p>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+            </p>
+        </form>
+    </body>
+</html>

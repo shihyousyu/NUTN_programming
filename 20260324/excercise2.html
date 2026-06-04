@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>鋼琴.html</title>
+        <style>
+            .piano {
+                position: relative;
+                width: 480px;
+                height: 280px;
+                margin: 30px auto;
+            }
+
+            .piano .white-key {
+                float: left;
+                width: 80px;
+                height: 280px;
+            }
+
+            .piano .black-key {
+                position: absolute;
+                top: 0;
+                width: 50px;
+                height: 170px;
+                z-index: 2;
+            }
+
+            .bk1 { left: 55px;  }
+            .bk2 { left: 135px; }
+            .bk3 { left: 295px; }
+            .bk4 { left: 375px; }
+
+            .label {
+                position: absolute;
+                bottom: 30px;
+                width: 80px;
+                text-align: center;
+                font-size: 22px;
+                font-weight: bold;
+                z-index: 3;
+            }
+            .lb1 { left: 0;    }
+            .lb2 { left: 80px; }
+            .lb3 { left: 160px;}
+            .lb4 { left: 240px;}
+            .lb5 { left: 320px;}
+            .lb6 { left: 400px;}
+        </style>
+    </head>
+
+    <body>
+        <div class="piano">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+            <img src="img/white_key.png" class="white-key" alt="白鍵">
+
+            <img src="img/black_key.png" class="black-key bk1" alt="黑鍵">
+            <img src="img/black_key.png" class="black-key bk2" alt="黑鍵">
+            <img src="img/black_key.png" class="black-key bk3" alt="黑鍵">
+            <img src="img/black_key.png" class="black-key bk4" alt="黑鍵">
+
+            <span class="label lb1">Do</span>
+            <span class="label lb2">Re</span>
+            <span class="label lb3">Mi</span>
+            <span class="label lb4">Fa</span>
+            <span class="label lb5">So</span>
+            <span class="label lb6">La</span>
+        </div>
+    </body>
+</html>

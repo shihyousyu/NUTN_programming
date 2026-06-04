@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Cards Shuffling</title>
+        <style>
+            table, td { border: 1px solid black }
+        </style>
+    </head>
+    <body>
+        <h1>Original order:</h1>
+        <table>
+            <script>
+                for (let i = 0; i < 4; i++) {
+                    document.writeln("<tr>");
+                    for (let j = 0; j < 13; j++) {
+                        document.writeln(`<td><img src="pokers/${i * 13 + j}.png"></td>`);
+                    }
+                    document.writeln("</tr>");
+                }
+            </script>
+        </table>
+
+        <h1>Randomly select 52 cards:</h1>   
+
+        <table id="shuffleTable"></table>
+        <input id="btn" type="button" value="shuffle">
+
+        <script>
+            function sf() {
+                let deck = [];
+                for (let i = 0; i < 52; i++) {
+                    deck[i] = i;
+                }
+
+                for (let i = deck.length - 1; i > 0; i--) {
+                    let j = Math.floor(Math.random() * (i + 1));
+                    let temp = deck[i];
+                    deck[i] = deck[j];
+                    deck[j] = temp;
+                }
+
+                let table = "";
+                for (let i = 0; i < 4; i++) {
+                    table += "<tr>";
+                    for (let j = 0; j < 13; j++) {
+                        table += `<td><img src="pokers/${deck[i * 13 + j]}.png"></td>`;
+                    }
+                    table += "</tr>";
+                }
+                document.getElementById("shuffleTable").innerHTML = table;
+            }
+
+            window.addEventListener("load", sf, false);
+            document.getElementById("btn").addEventListener("click", sf, false);
+        </script>
+    </body>
+</html>

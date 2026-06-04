@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>對對樂 Memory Match</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; }
+        table { margin: 20px auto; border-collapse: collapse; }
+        td {
+            border: 1px solid #333;
+            padding: 0;
+            cursor: pointer;
+        }
+        td img {
+            display: block;
+            width: 60px;
+            height: auto;
+        }
+        #msg {
+            font-size: 28px;
+            color: red;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 40px;
+        }
+        #restart {
+            font-size: 18px;
+            padding: 8px 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table id="gameTable"></table>
+    <div id="msg"></div>
+    <button id="restart">Restart</button>
+
+    <script>
+        let deck = [];
+        let revealed = [];
+        let firstPick = -1;
+        let secondPick = -1;
+        let lock = false;
+
+        function initGame() {
+            deck = [];
+            for (let value = 26; value <= 38; value++) {
+                for (let k = 0; k < 4; k++) {
+                    deck.push(value);
+                }
+            }
+
+            for (let i = deck.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+
+            revealed = new Array(52).fill(false);
+            firstPick = -1;
+            secondPick = -1;
+            lock = false;
+            document.getElementById("msg").textContent = "";
+
+            drawTable();
+        }
+
+        function drawTable() {
+            let html = "";
+            for (let i = 0; i < 4; i++) {
+                html += "<tr>";
+                for (let j = 0; j < 13; j++) {
+                    let idx = i * 13 + j;
+                    let showFront = revealed[idx] || idx === firstPick || idx === secondPick;
+                    let src = showFront ? `pokers/${deck[idx]}.png` : "pokers/52.png";
+                    html += `<td onclick="flip(${idx})"><img src="${src}"></td>`;
+                }
+                html += "</tr>";
+            }
+            document.getElementById("gameTable").innerHTML = html;
+        }
+
+        function flip(idx) {
+            if (lock) return;
+            if (revealed[idx]) return;
+            if (idx === firstPick) return;
+
+            if (firstPick === -1) {
+                firstPick = idx;
+                drawTable();
+            } else {
+                secondPick = idx;
+                drawTable();
+                lock = true;
+
+                if (deck[firstPick] === deck[secondPick]) {
+                    setTimeout(() => {
+                        revealed[firstPick] = true;
+                        revealed[secondPick] = true;
+                        firstPick = -1;
+                        secondPick = -1;
+                        lock = false;
+                        drawTable();
+                        checkWin();
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        firstPick = -1;
+                        secondPick = -1;
+                        lock = false;
+                        drawTable();
+                    }, 800);
+                }
+            }
+        }
+
+        function checkWin() {
+            if (revealed.every(v => v === true)) {
+                document.getElementById("msg").textContent = "恭喜獲得勝利~!";
+            }
+        }
+
+        window.addEventListener("load", initGame);
+        document.getElementById("restart").addEventListener("click", initGame);
+    </script>
+</body>
+</html>

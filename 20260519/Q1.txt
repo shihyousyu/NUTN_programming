@@ -1,0 +1,2 @@
+Total using indices: NaN
+Total using for...in: 48
