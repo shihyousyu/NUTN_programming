@@ -3,6 +3,7 @@
 
 int main(){
     double beginning, ending;
+    printf("TAXI FARE CALCULATOR\n");
     printf("Enter beginning odometer reading=> ");
     scanf("%lf", &beginning);
     printf("Enter ending odometer reading=> ");
