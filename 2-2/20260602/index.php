@@ -20,10 +20,10 @@
             </select> 日
             <br><br>
             <label>身高：</label>
-            <input type="number" name="height" step="0.1" required> 公分
+            <input type="number" name="height" step="0.1" min="0.1" required> 公分
             <br><br>
             <label>體重：</label>
-            <input type="number" name="weight" step="0.1" required> 公斤
+            <input type="number" name="weight" step="0.1" min="0.1" required> 公斤
             <br><br>
             <input type="submit" value="提交">
         </form>
@@ -31,11 +31,14 @@
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $y = intval($_POST['year']);
-        $m = intval($_POST['month']);
-        $d = intval($_POST['day']);
-        $h_cm = floatval($_POST['height']);
-        $w_kg = floatval($_POST['weight']);
+        $y = intval(($_POST['year'] ?? 0));
+        $m = intval(($_POST['month'] ?? 0));
+        $d = intval(($_POST['day'] ?? 0));
+        $h_cm = floatval(($_POST['height'] ?? 0));
+        $w_kg = floatval(($_POST['weight'] ?? 0));
+        if(!checkdate($m, $d, $y) || !is_finite($h_cm) || !is_finite($w_kg) || $h_cm <= 0 || $w_kg <= 0){
+            echo "<p>請輸入有效日期與大於零的身高、體重。</p>";
+        }else{
 
         function getZodiacName($month, $day) {
             if (($month == 3 && $day >= 21) || ($month == 4 && $day <= 19)) return "牡羊座";
@@ -54,10 +57,10 @@
         $zodiac = getZodiacName($m, $d);
 
         $zodiacImages = [
-            "牡羊座" => "aries.png", "金牛座" => "taurus.png", "雙子座" => "gemini.png",
-            "巨蟹座" => "cancer.png", "獅子座" => "leo.png", "處女座" => "virgo.png",
-            "天秤座" => "libra.png", "天蠍座" => "scorpio.png", "射手座" => "sagittarius.png",
-            "摩羯座" => "capricorn.png", "水瓶座" => "aquarius.png", "雙魚座" => "pisces.png"
+            "牡羊座" => "Aries.png", "金牛座" => "Taurus.png", "雙子座" => "Gemini.png",
+            "巨蟹座" => "Cancer.png", "獅子座" => "Leo.png", "處女座" => "Virgo.png",
+            "天秤座" => "Libra.png", "天蠍座" => "Scorpio.png", "射手座" => "Sagittarius.png",
+            "摩羯座" => "Capricorn.png", "水瓶座" => "Aquarius.png", "雙魚座" => "Pisces.png"
         ];
         $imgUrl = $zodiacImages[$zodiac];
 
@@ -74,7 +77,7 @@
     <div class="result-section" style="width: 80%;">
         <h2 align="left">Result:</h2>
         <p align="left">執行結果</p>
-        
+
         <br>
         <p><b>星座</b></p>
         <img src="<?= $imgUrl ?>" width="150" alt="<?= $zodiac ?>">
@@ -96,7 +99,7 @@
         <p><b>評語</b></p>
         <p><font size="2"><?= $comment ?></font></p>
     </div>
-    <?php } ?>
+    <?php }} ?>
 </div>
 
 </body>

@@ -21,12 +21,13 @@
             </script>
         </table>
 
-        <h1>Randomly select 52 cards:</h1>   
+        <h1>Randomly select 52 cards:</h1>
 
         <table id="shuffleTable"></table>
         <input id="btn" type="button" value="shuffle">
 
         <script>
+            const winSound = new Audio("win.mp3");
             function sf(){
                 let table = "";
                 for(let i = 0; i < 4; i ++){
@@ -36,6 +37,8 @@
                     table += "</tr>";
                 }
                 document.getElementById("shuffleTable").innerHTML = table;
+                winSound.currentTime = 0;
+                winSound.play().catch(function(){ /* Browsers may block autoplay until a click. */ });
             }
             window.addEventListener("load", sf, false);
             document.getElementById("btn").addEventListener("click", sf, false);

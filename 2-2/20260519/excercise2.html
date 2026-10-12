@@ -41,8 +41,13 @@
         let firstPick = -1;
         let secondPick = -1;
         let lock = false;
+        let pendingTimer = null;
+        let generation = 0;
 
         function initGame() {
+            if(pendingTimer !== null) clearTimeout(pendingTimer);
+            pendingTimer = null;
+            generation++;
             deck = [];
             for (let value = 26; value <= 38; value++) {
                 for (let k = 0; k < 4; k++) {
@@ -92,10 +97,13 @@
                 drawTable();
                 lock = true;
 
-                if (deck[firstPick] === deck[secondPick]) {
-                    setTimeout(() => {
-                        revealed[firstPick] = true;
-                        revealed[secondPick] = true;
+                const first = firstPick, second = secondPick, game = generation;
+                if (deck[first] === deck[second]) {
+                    pendingTimer = setTimeout(() => {
+                        if(game !== generation) return;
+                        pendingTimer = null;
+                        revealed[first] = true;
+                        revealed[second] = true;
                         firstPick = -1;
                         secondPick = -1;
                         lock = false;
@@ -103,7 +111,9 @@
                         checkWin();
                     }, 500);
                 } else {
-                    setTimeout(() => {
+                    pendingTimer = setTimeout(() => {
+                        if(game !== generation) return;
+                        pendingTimer = null;
                         firstPick = -1;
                         secondPick = -1;
                         lock = false;

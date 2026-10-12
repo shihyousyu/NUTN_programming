@@ -10,9 +10,15 @@
 
             while(true){
                 var input = window.prompt("enter a number(-1 to exit): ");
+                if(input === null) break;
+                if(input.trim() === "") continue;
                 var num = Number(input);
 
                 if(num === -1) break;
+                if(!Number.isInteger(num) || num <= 0){
+                    window.alert("Enter a positive integer or -1 to exit.");
+                    continue;
+                }
 
                 sum += num;
                 n += 1;
@@ -21,7 +27,8 @@
                 min = Math.min(min, num);
             }
 
-            document.writeln("The avg is " + sum / n + "<br/>" + "The max is " + max + "<br/>" + "The min is " + min + "<br/>");
+            if(n === 0) document.writeln("No numbers entered.");
+            else document.writeln("The avg is " + sum / n + "<br/>" + "The max is " + max + "<br/>" + "The min is " + min + "<br/>");
         </script>
     </head>
 </html>
