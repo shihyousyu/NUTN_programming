@@ -4,10 +4,9 @@
 
 int is_palindrome(char str[], int start, int end){
     if(start >= end) return 1;
-    if(tolower(str[start]) != tolower(str[end])) return 0;
-
-    if(!isalnum(str[start])) return is_palindrome(str, start + 1, end);
-    if(!isalnum(str[end])) return is_palindrome(str, start, end - 1);
+    if(!isalnum((unsigned char)str[start])) return is_palindrome(str, start + 1, end);
+    if(!isalnum((unsigned char)str[end])) return is_palindrome(str, start, end - 1);
+    if(tolower((unsigned char)str[start]) != tolower((unsigned char)str[end])) return 0;
 
     return is_palindrome(str, start + 1, end - 1);
 }

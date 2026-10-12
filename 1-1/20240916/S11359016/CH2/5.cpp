@@ -7,5 +7,5 @@ int main() {
     scanf("%lf", &VBTI);
     printf("Minutes over which to infuse => ");
     scanf("%lf", &min);
-    printf("VBTI: %.0f ml\nRate: %.0f ml/hr", VBTI, VBTI / min * 60);
+    printf("VTBI: %.0f ml\nRate: %.0f ml/hr", VBTI, VBTI / min * 60);
 }

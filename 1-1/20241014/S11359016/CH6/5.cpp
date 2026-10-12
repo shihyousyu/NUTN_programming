@@ -13,7 +13,7 @@ int reverse(int n){
 int is_prime(int n){
     if(n <= 1)
         return 0;
-    for(int i = 2; i * i <= n; i++)
+    for(int i = 2; i <= n / i; i++)
         if (n % i == 0)
             return 0;
     return 1;
@@ -25,11 +25,11 @@ int is_palindrome(int n){
 
 int main() {
     int number;
-    while(scanf("%d", &number) != EOF) {
+    while(scanf("%d", &number) == 1) {
         printf("reversed %d: %d\n", number, reverse(number));
-        if(is_prime) printf("%d is a prime\n", number);
+        if(is_prime(number)) printf("%d is a prime\n", number);
         else printf("%d is not a prime\n", number);
-        if(is_palindrome) printf("%d is palindrome\n", number);
+        if(is_palindrome(number)) printf("%d is palindrome\n", number);
         else printf("%d is not a palindrome\n", number);
     }
     return 0;

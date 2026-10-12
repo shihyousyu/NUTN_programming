@@ -8,13 +8,15 @@ int main(){
     printf("height: ");
     scanf("%lf", &height);
 
+    if(weight <= 0 || height <= 0) return 1;
     BMI = 703 * weight / pow(height, 2);
 
+    printf("BMI: %.1f\n", BMI);
     if(BMI < 18.5)
         printf("Underweight\n");
-    else if(18.5 <= BMI && BMI <= 25)
+    else if(BMI < 25)
         printf("Normal");
-    else if(25.0 <= BMI && BMI <= 30)
+    else if(BMI < 30)
         printf("Overweight");
     else
         printf("Obese");

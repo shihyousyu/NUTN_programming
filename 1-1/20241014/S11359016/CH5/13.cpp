@@ -18,10 +18,11 @@ float calc_avg(char record[]){
 
 int main(){
     FILE *file = fopen("input.txt", "r");
+    if(file == NULL){ perror("input.txt"); return 1; }
     int player_number;
     char record[100];
 
-    while(fscanf(file, "%d %s", &player_number, record) == 2){
+    while(fscanf(file, "%d %99s", &player_number, record) == 2){
         printf("Player %d's record: %s\n", player_number, record);
         float avg = calc_avg(record);
         printf("Player %d's batting average: %.3f\n\n", player_number, avg);

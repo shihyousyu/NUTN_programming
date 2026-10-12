@@ -4,6 +4,7 @@ int dx[] = {0, 1, 0, -1};
 int dy[] = {1, 0, -1, 0};
 
 int dfs(char maze[8][8], int x, int y, int visited[8][8], int path[][2], int *pathLength){
+    if(x < 0 || x >= 8 || y < 0 || y >= 8 || maze[x][y] != ' ' || visited[x][y]) return 0;
     if(x == 7 && y == 7){
         path[*pathLength][0] = x;
         path[*pathLength][1] = y;
@@ -44,7 +45,7 @@ int main(){
     int path[8 * 8][2];
     int pathLength = 0;
 
-    if(dfs(maze, 0, 0, visited, path, &pathLength)){
+    if(dfs(maze, 0, 1, visited, path, &pathLength)){
         printf("find a route:\n");
         for(int i = 0; i < pathLength; i++) printf("(%d, %d)\n", path[i][0], path[i][1]);
     }

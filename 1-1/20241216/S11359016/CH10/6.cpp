@@ -2,24 +2,29 @@
 #include <stdio.h>
 #include <string.h>
 
+#define MAX_WORDS 100
+
 typedef struct{
     char language[20];
     int word_count;
-    char words[100][20];
+    char words[MAX_WORDS][21];
 } wordlist_t;
 
-void load_word_list(wordlist_t* list){
+int load_word_list(const char* filename, wordlist_t* list){
     list->word_count = 0;
 
-    FILE* file = fopen("wordlist.txt", "r");
-    fscanf(file, "%s", list->language);
-    while(fscanf(file, "%s", list->words[list->word_count]) == 1){
+    FILE* file = fopen(filename, "r");
+    if(file == NULL) return 0;
+    if(fscanf(file, "%19s", list->language) != 1){fclose(file); return 0;}
+    while(fscanf(file, "%20s", list->words[list->word_count]) == 1){
         list->word_count++;
-        if(list->word_count >= 100){
+        if(list->word_count >= MAX_WORDS){
             printf("The list is full.\n");
             break;
         }
     }
+    fclose(file);
+    return 1;
 }
 
 int contains(char* word, wordlist_t* list){
@@ -29,7 +34,7 @@ int contains(char* word, wordlist_t* list){
 }
 
 void add_word(char* word, wordlist_t* list){
-    if(list->word_count >= 100){
+    if(list->word_count >= MAX_WORDS){
         printf("The list is full. Could not add word %s.\n", word);
         return;
     }
@@ -61,23 +66,23 @@ void display_word_list(const wordlist_t* list){
 }
 
 int main(){
-    wordlist_t list1 = {"", 0};
-    wordlist_t list2 = {"", 0};
-    load_word_list(&list1);
+    wordlist_t list1 = {0};
+    wordlist_t list2 = {0};
+    if(!load_word_list("wordlist.txt", &list1)){perror("wordlist.txt"); return 1;}
 
     printf("Enter the language: ");
-    scanf("%s", list2.language);
+    scanf("%19s", list2.language);
     printf("Enter 12 words:\n");
     for(int i = 0; i < 12; i++){
-        char word[20];
-        scanf("%s", word);
+        char word[21];
+        if(scanf("%20s", word) != 1) return 1;
         add_word(word, &list2);
     }
 
     printf("\nEnter the word you want to search (type \"exit\" to stop):\n");
     while(1){
-        char word[20];
-        scanf("%s", word);
+        char word[21];
+        if(scanf("%20s", word) != 1) return 1;
         if(strcmp(word, "exit") == 0) break;
         if(contains(word, &list1)) printf("Word %s exists in list1.\n", word);
         else printf("Word %s does not exist in list1.\n", word);

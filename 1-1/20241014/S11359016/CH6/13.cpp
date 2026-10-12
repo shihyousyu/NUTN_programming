@@ -1,55 +1,57 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include<stdio.h>
+#include <stdio.h>
 #include <ctype.h>
 
-const char build_num = 1;
-const char build_id = 2;
-const char number = 3;
-const char identifier = 4;
-const char start = 5;
-const char stop = 6;
+enum State { start, sign_only, build_num, fraction, build_id, stop, invalid };
 
-char transition(char current_state, char transition_char){
-    if(current_state == start){
-        if(isdigit(transition_char)) return(build_num);
-        else if(isalpha(transition_char)) return(build_id);
-        else if(transition_char == ' ') return(start);
-        else if(transition_char == '.') return(stop);
-        else if(transition_char == EOF) return(stop);
+/* A standalone period ends the input. Within a number it starts a fraction. */
+enum State transition(enum State state, int ch){
+    if(state == start){
+        if(ch == EOF || ch == '.') return stop;
+        if(isspace((unsigned char)ch)) return start;
+        if(ch == '+' || ch == '-') return sign_only;
+        if(isdigit((unsigned char)ch)) return build_num;
+        if(isalpha((unsigned char)ch) || ch == '_') return build_id;
+    } else if(state == sign_only){
+        if(isdigit((unsigned char)ch)) return build_num;
+        if(ch == '.') return fraction;
+    } else if(state == build_num){
+        if(isdigit((unsigned char)ch)) return build_num;
+        if(ch == '.') return fraction;
+    } else if(state == fraction){
+        if(isdigit((unsigned char)ch)) return fraction;
+    } else if(state == build_id){
+        if(isalnum((unsigned char)ch) || ch == '_') return build_id;
     }
-
-    else if(current_state == build_num){
-        if(transition_char == ' ') return(number);
-        else if(isdigit(transition_char)) return(build_num);
-        else if(transition_char == '\n') return(number);
-    }
-    else if(current_state == build_id){
-        if(transition_char == ' ')
-            return(identifier);
-        else if(isalpha(transition_char) || isdigit(transition_char) || transition_char == '_'){
-            return(build_id);
-        }
-        else if(transition_char == '\n') return(identifier);
-    }
+    return invalid;
 }
 
-int main(){
-    char current_state, transition_char;
+int main(void){
+    enum State state = start;
+    int ch;
+    int has_digit = 0;
     printf("Enter the data :");
-    current_state = start;
-    do{
-        if(current_state == identifier){
-            printf(" - Identifier\n");
-            current_state = start;
+    while((ch = getchar()) != EOF){
+        if(isspace((unsigned char)ch) && state != start){
+            if(state != build_id && !has_digit){
+                fprintf(stderr, "Invalid number.\n");
+                return 1;
+            }
+            printf(state == build_id ? " - Identifier\n" : " - Number\n");
+            state = start;
+            has_digit = 0;
+            continue;
         }
-        else if(current_state == number){
-            printf(" - Number\n");
-            current_state = start;
+        state = transition(state, ch);
+        if(state == stop) return 0;
+        if(state == invalid){
+            fprintf(stderr, "Invalid token.\n");
+            return 1;
         }
-        scanf("%c", &transition_char);
-        if(transition_char != ' ' && transition_char != '\n')
-            printf("%c", transition_char);
-        current_state = transition(current_state, transition_char);
-    }while(current_state != stop);
+        if(state != start) putchar(ch);
+        if(isdigit((unsigned char)ch)) has_digit = 1;
+    }
+    if(state == build_id) puts(" - Identifier");
+    else if(has_digit) puts(" - Number");
+    else if(state != start){fprintf(stderr, "Incomplete number.\n"); return 1;}
     return 0;
 }

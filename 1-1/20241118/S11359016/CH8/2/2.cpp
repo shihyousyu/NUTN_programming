@@ -4,7 +4,7 @@
 #include <math.h>
 
 int search(char COLOR_CODES[][7], int size, char* target) {
-    for (int i = 0; i < size; i++) 
+    for (int i = 0; i < size; i++)
         if (strcmp(COLOR_CODES[i], target) == 0) return i;
     return -1;
 }
@@ -20,11 +20,11 @@ int main() {
         printf("Enter the colors of the resistor's three bands, beginning with the band nearest the end.\n");
         printf("Type the colors in lowercase letters only, NO CAPS.\n");
         printf("Band 1 => ");
-        scanf("%s", band1);
+        scanf("%9s", band1);
         printf("Band 2 => ");
-        scanf("%s", band2);
+        scanf("%9s", band2);
         printf("Band 3 => ");
-        scanf("%s", band3);
+        scanf("%9s", band3);
 
         int index1 = search(COLOR_CODES, 10, band1);
         int index2 = search(COLOR_CODES, 10, band2);
@@ -33,7 +33,7 @@ int main() {
         if (index1 == -1) printf("Invalid color: %s\n", band1);
         else if (index2 == -1) printf("Invalid color: %s\n", band2);
         else if (index3 == -1) printf("Invalid color: %s\n", band3);
-        else printf("Resistance value: %.f kilo-ohms\n", (index1 * 10 + index2) * pow(10, index3));
+        else printf("Resistance value: %.3f kilo-ohms\n", (index1 * 10 + index2) * pow(10, index3) / 1000.0);
 
         printf("Do you want to decode another resistor? (y/n)\n=> ");
         scanf(" %c", &choice);
