@@ -4,6 +4,7 @@ int main() {
     int num, sum = 0;
     scanf("%d", &num);
     while(num >= 1){
+        printf("%d\n", num % 10);
         sum += num % 10;
         num /= 10;
     }

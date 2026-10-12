@@ -5,6 +5,7 @@ double newton_method(double c, int n) {
     double tolerance = 0.000001;
     double x = c / 2.0;
     double diff;
+    int cnt = 0;
 
     do{
         double fx = pow(x, n) - c;
@@ -13,7 +14,8 @@ double newton_method(double c, int n) {
 
         diff = fabs(x_next - x);
         x = x_next;
-    }while(diff > tolerance);
+        cnt ++;
+    } while(diff > tolerance && cnt < 100);
 
     return x;
 }

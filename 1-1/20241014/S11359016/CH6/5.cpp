@@ -27,9 +27,9 @@ int main() {
     int number;
     while(scanf("%d", &number) != EOF) {
         printf("reversed %d: %d\n", number, reverse(number));
-        if(is_prime) printf("%d is a prime\n", number);
+        if(is_prime(number)) printf("%d is a prime\n", number);
         else printf("%d is not a prime\n", number);
-        if(is_palindrome) printf("%d is palindrome\n", number);
+        if(is_palindrome(number)) printf("%d is palindrome\n", number);
         else printf("%d is not a palindrome\n", number);
     }
     return 0;

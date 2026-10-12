@@ -3,6 +3,7 @@
 
 int main() {
     double hour, min;
+    printf("Enter elapsed hours and minutes: ");
     scanf("%lf%lf", &hour, &min);
     hour = hour + (min / 60);
     printf("%.1f", ((4 * hour * hour) / (hour + 2)) - 20);
