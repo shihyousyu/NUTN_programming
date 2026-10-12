@@ -5,7 +5,8 @@ int main(){
     double weight, height, BMI;
     printf("weight: ");
     scanf("%lf", &weight);
-    printf("height", &height);
+    printf("height: ");
+    scanf("%lf", &height);
 
     BMI = 703 * weight / pow(height, 2);
 
