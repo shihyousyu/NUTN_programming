@@ -8,29 +8,31 @@ using std::cout;
 
 namespace SavitchEmployees{
     Administrator::Administrator(){
-        SalariedEmployee();
         adminTitle = "No title yet";
         responsibility = "No responsibility yet";
         supervisorName = "No supervisor yet";
     }
 
-    Administrator::Administrator(const string& theName, const string& theNumber, double theWeeklyPay, const string& adminTitle, const string& responsibility, const string& supervisorName) : 
-        SalariedEmployee(theName, theNumber, theWeeklyPay), adminTitle(adminTitle), responsibility(responsibility), supervisorName(supervisorName){}
+    Administrator::Administrator(const string& theName, const string& theNumber, double theAnnualSalary, const string& adminTitle, const string& responsibility, const string& supervisorName) :
+        SalariedEmployee(theName, theNumber, theAnnualSalary), adminTitle(adminTitle), responsibility(responsibility), supervisorName(supervisorName){}
 
     void Administrator::setSupervisor(const string& newSupervisorName){supervisorName = newSupervisorName;}
 
     void Administrator::inputAdministratorData(){
+        cout << "Annual salary: ";
+        cin >> salary;
         cout << "Administrator's title: ";
-        cin >> adminTitle;
+        getline(cin >> std::ws, adminTitle);
         cout << "Responsibility: ";
-        cin >> responsibility;
+        getline(cin >> std::ws, responsibility);
         cout << "Supervisor name: ";
-        cin >> supervisorName;
+        getline(cin >> std::ws, supervisorName);
     }
 
     void Administrator::print() const{
         cout << "\nDATA: \n";
         cout << "\tName: " << getName() << "\n";
+        cout << "\tAnnual salary: " << salary << "\n";
         cout << "\tTitle: " << adminTitle << "\n";
         cout << "\tResponsibility: " << responsibility << "\n";
         cout << "\tSupervisor name: " << supervisorName << "\n";
@@ -44,7 +46,7 @@ namespace SavitchEmployees{
         cout << "_________________________________________________\n";
         cout << "Check Stub NOT NEGOTIABLE \n";
         cout << "Employee Number: " << getSsn( ) << "\n";
-        cout << "Salaried Employee (Administrator). Regular Pay: " << salary << "\n";
+        cout << "Salaried Employee (Administrator). Annual Salary: " << getNetPay() << "\n";
         cout << "_________________________________________________\n";
     }
 

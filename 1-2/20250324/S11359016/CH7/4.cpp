@@ -7,9 +7,9 @@ class HotDogStand{
         int sold_today;
         static int total;
     public:
-        HotDogStand(){};
+        HotDogStand() : stand_id(0), sold_today(0){};
         HotDogStand(int id, int sold) : stand_id(id), sold_today(sold){total += sold_today;}
-        
+
         void justSold(){
             sold_today++;
             total++;
@@ -24,9 +24,9 @@ int main(){
     cin >> a >> b >> c;
     HotDogStand stand1(1, a), stand2(2, b), stand3(3, c);
     cin >> a >> b >> c;
-    for(int i = 0; i < a; i ++) stand1.justSold();    
-    for(int i = 0; i < b; i ++) stand2.justSold();    
-    for(int i = 0; i < c; i ++) stand3.justSold();    
+    for(int i = 0; i < a; i ++) stand1.justSold();
+    for(int i = 0; i < b; i ++) stand2.justSold();
+    for(int i = 0; i < c; i ++) stand3.justSold();
 
     cout << "Stand 1: " << stand1.getSold() << "\n";
     cout << "Stand 2: " << stand2.getSold() << "\n";

@@ -1,27 +1,31 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 class MyInteger{
     private:
         vector<int> num;
+        int value;
     public:
-        MyInteger(){}
+        MyInteger() : value(0){setNum(0);}
         MyInteger(int n){setNum(n);}
-
         void setNum(int n){
+            value = n;
             num.clear();
-            while(n != 0){
-                num.push_back(n % 10);
-                n /= 10;
-            }
+            long long magnitude = n;
+            if(magnitude < 0) magnitude = -magnitude;
+            do{
+                num.push_back(static_cast<int>(magnitude % 10));
+                magnitude /= 10;
+            }while(magnitude != 0);
         }
-        
-        int operator [](int index){return index >= num.size() ? -1 : num[index];}
-        friend istream& operator >>(istream& ip, MyInteger n){
-            int t;
-            ip >> t;
-            n.setNum(t);
+        int getNum() const{return value;}
+        int operator[](int index) const{
+            return index < 0 || static_cast<size_t>(index) >= num.size() ? -1 : num[index];
+        }
+        friend istream& operator>>(istream& ip, MyInteger& n){
+            int value;
+            if(ip >> value) n.setNum(value);
             return ip;
         }
 };
@@ -29,11 +33,9 @@ class MyInteger{
 int main(){
     int index;
     MyInteger num;
-    cin >> num;
-    while(true){
-        cin >> index;
-        if(index == -1) break;
-        else if(num[index] != -1) cout << num[index] << "\n";
+    if(!(cin >> num)) return 1;
+    while(cin >> index && index != -1){
+        if(num[index] != -1) cout << num[index] << "\n";
         else cout << "out of range\n";
     }
     return 0;

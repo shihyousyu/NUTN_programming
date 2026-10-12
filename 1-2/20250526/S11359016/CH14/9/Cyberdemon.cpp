@@ -11,17 +11,15 @@ Cyberdemon::Cyberdemon(){
 }
 
 Cyberdemon::Cyberdemon(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 int Cyberdemon::getDamage(){
     int damage;
-    srand(time(NULL));
-    damage = (rand() % strength) + 1;
+    damage = Demon::getDamage();
     cout << getSpecies() << " attacks for " << damage << " points!\n";
 
-    damage = inherentAbility(damage);
     return damage;
 }
 

@@ -8,9 +8,9 @@ class Pizza{
         int cheese;
         int pepperoni;
     public:
-        Pizza(){};
+        Pizza() : size("Small"), cheese(0), pepperoni(0){};
         Pizza(string t, string s, int c, int p) : type(t), size(s), cheese(c), pepperoni(p){}
-        
+
         void setType(string t){type = t;}
         void setSize(string s){size = s;}
         void setCheese(int c){cheese = c;}
@@ -20,7 +20,7 @@ class Pizza{
         string getSize() const{return size;}
         int getCheese() const{return cheese;}
         int getPepperoni() const{return pepperoni;}
-        
+
         void outputDescription() const{
             cout << "Type: " << type << "\n";
             cout << "Size: " << size << "\n";
@@ -34,7 +34,18 @@ class Pizza{
 
 int main(){
     string t, s; int c, p;
-    cin >> t >> s >> c >> p;
+    // Read type up to the size token, allowing "deep dish" and "hand tossed".
+    string word;
+    while(cin >> word){
+        if(word == "Small" || word == "Medium" || word == "Large" ||
+           word == "small" || word == "medium" || word == "large"){s = word; break;}
+        if(!t.empty()) t += " ";
+        t += word;
+    }
+    if(s.empty() || !(cin >> c >> p) || c < 0 || p < 0) return 1;
+    if(s == "small") s = "Small";
+    if(s == "medium") s = "Medium";
+    if(s == "large") s = "Large";
     Pizza a(t, s, c, p);
     a.outputDescription();
     cout << "Total Price: $" << a.computePrice() << "\n";

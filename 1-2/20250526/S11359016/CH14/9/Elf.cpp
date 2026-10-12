@@ -10,14 +10,13 @@ Elf::Elf(){
     hitpoints = 10;
 }
 Elf::Elf(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 int Elf::getDamage(){
     int damage;
-    srand(time(NULL));
-    damage = (rand() % strength) + 1;
+    damage = Creature::getDamage();
     cout << getSpecies( ) << " attacks for " << damage << " points!\n";
 
     if((rand() % 10) == 0){

@@ -8,6 +8,7 @@
 using namespace std;
 
 int main(){
+    srand(time(NULL));
     int i;
     Human human;
     Cyberdemon cyberdemon;

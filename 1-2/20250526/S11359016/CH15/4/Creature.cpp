@@ -5,17 +5,17 @@ using std::string;
 using std::cout;
 
 Creature::Creature(){
-    strength = 0;
-    hitpoints = 0;
+    strength = 10;
+    hitpoints = 10;
 }
 Creature::Creature(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 void Creature::setHitpoints(int newHitpoints) {
     hitpoints = newHitpoints;
-    if (hitpoints < 0) hitpoints = 0;
+    if (hitpoints < 0) hitpoints = 10;
 }
 
 int Creature::getDamage(){

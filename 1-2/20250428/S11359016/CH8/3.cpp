@@ -10,13 +10,13 @@ class Complex{
         Complex() : real(0), imaginary(0){}
         Complex(double r) : real(r), imaginary(0){}
         Complex(double r, double i) : real(r), imaginary(i){}
-        
+
         void setReal(double r){real = r;}
         void setImaginary(double i){imaginary = i;}
 
         double getReal() const{return real;}
         double getImaginary() const{return imaginary;}
-        
+
         friend bool operator ==(const Complex& c1, const Complex& c2){
             return (c1.real == c2.real) && (c1.imaginary == c2.imaginary);
         }
@@ -36,11 +36,13 @@ class Complex{
             ip >> c.real >> c.imaginary;
             return ip;
         }
-        friend ostream& operator <<(ostream& op, Complex& c){
+        friend ostream& operator <<(ostream& op, const Complex& c){
             op << c.real << (c.imaginary >= 0 ? "+" : "-") << fabs(c.imaginary) << "i";
             return op;
         }
 };
+
+const Complex i(0, 1);
 
 int main(){
     Complex c1, c2, c3;

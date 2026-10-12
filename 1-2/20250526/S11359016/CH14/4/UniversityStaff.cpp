@@ -12,7 +12,10 @@ UniversityStaff::UniversityStaff(const UniversityStaff& theObject){name = theObj
 
 string UniversityStaff::getName() const{return name;}
 
-UniversityStaff& UniversityStaff::operator=(const UniversityStaff& rtSide){name = rtSide.name;}
+UniversityStaff& UniversityStaff::operator=(const UniversityStaff& rtSide){
+    name = rtSide.name;
+    return *this;
+}
 istream& operator>>(istream& inStream, UniversityStaff& staffObject){
     cout << "Enter the proctor of the student > ";
     inStream >> staffObject.name;

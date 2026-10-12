@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include<Demon.h>
+#include"Demon.h"
 #include"Balrog.h"
 using std::string;
 using std::cout;
@@ -11,7 +11,7 @@ Balrog::Balrog(){
 }
 
 Balrog::Balrog(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 

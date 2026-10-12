@@ -11,17 +11,15 @@ Balrog::Balrog(){
 }
 
 Balrog::Balrog(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 int Balrog::getDamage(){
     int damage;
-    srand(time(NULL));
-    damage = (rand() % strength) + 1;
+    damage = Demon::getDamage();
     cout << getSpecies( ) << " attacks for " << damage << " points!\n";
 
-    damage = inherentAbility(damage);
 
     int damage2 = (rand() % strength) + 1;
     cout << "Balrog speed attack inflicts " << damage2 << " additional damage points!\n";

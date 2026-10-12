@@ -3,6 +3,7 @@
 #include<string>
 #include<ctime>
 #include<cstdlib>
+#include<stdexcept>
 using namespace std;
 
 class BoxOfProduce {
@@ -15,8 +16,8 @@ class BoxOfProduce {
             box[1] = item2;
             box[2] = item3;
         }
-        string getItem(int index) const{return box[index];}
-        void setItem(int index, const string& newItem){box[index] = newItem;}    
+        string getItem(int index) const{if(index < 0 || index >= 3) throw out_of_range("Box index must be 0..2."); return box[index];}
+        void setItem(int index, const string& newItem){if(index < 0 || index >= 3) throw out_of_range("Box index must be 0..2."); box[index] = newItem;}
         void display() const{for(string i : box) cout << i << " ";}
 };
 
@@ -25,10 +26,12 @@ int main(){
     string p[5];
     ifstream file("input.txt");
 
-    for(int i = 0; i < 5; i++) getline(file, p[i]);
+    for(int i = 0; i < 5; i++){
+        if(!getline(file, p[i])){cerr << "Expected five produce items in input.txt.\n"; return 1;}
+    }
     file.close();
-    
-    BoxOfProduce box(p[1], p[2], p[3]);
+
+    BoxOfProduce box(p[rand() % 5], p[rand() % 5], p[rand() % 5]);
     box.display();
 
     int cnt;
@@ -36,9 +39,12 @@ int main(){
     for(int i = 0; i < cnt; i ++){
         int pos;
         string choice;
-        cin >> pos >> choice;
+        if(!(cin >> pos >> choice)) return 1;
+        bool allowed = false;
+        for(const string& item : p) if(item == choice) allowed = true;
+        if(pos < 0 || pos >= 3 || !allowed){cerr << "Choose index 0..2 and an item from the list.\n"; return 1;}
         box.setItem(pos, choice);
     }
     box.display();
-    
+
 }

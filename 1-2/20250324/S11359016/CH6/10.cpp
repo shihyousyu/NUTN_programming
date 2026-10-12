@@ -5,7 +5,7 @@ class Weight{
     private:
         double weight;
     public:
-        Weight(){};
+        Weight() : weight(0){};
 
         void setWeightPounds(double w){weight = w;}
         void setWeightKilograms(double w){weight = w * 2.21;}

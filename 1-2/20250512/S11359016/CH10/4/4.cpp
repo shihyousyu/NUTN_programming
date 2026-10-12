@@ -16,7 +16,7 @@ class Subscriber{
             string s;
             getline(cin, s);
             stringstream ss(s);
-            
+
             vector<string> temp;
 		    while(ss >> input) temp.push_back(input);
 		    numChannels = temp.size();
@@ -41,7 +41,8 @@ class Subscriber{
         ~Subscriber(){delete [] channelList;}
 
         void setName(string n){name = n;}
-        
+        void setChannels(){resetChannels(); handleChannels();}
+
         string getName() const{return name;}
         int getNumChannels() const{return numChannels;}
         string* getChannelList() const{return channelList;}

@@ -5,16 +5,17 @@ using std::string;
 using std::cout;
 
 Creature::Creature(){
-    strength = 0;
-    hitpoints = 0;
+    strength = 10;
+    hitpoints = 10;
 }
 Creature::Creature(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 int Creature::getDamage(){
-    cout << "[ERROR OCCURED]\n";
-    return 0;
+    int damage = (rand() % strength) + 1;
+    cout << "Creature attacks for " << damage << " points!\n";
+    return damage;
 }
 string Creature::getSpecies(){return "Unknown";}

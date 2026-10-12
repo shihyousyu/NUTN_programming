@@ -1,12 +1,14 @@
 #include<iostream>
+#include<limits>
+#include<stdexcept>
 using namespace std;
 
 class PrimeNumber{
 	private:
 		static bool isPrime(int n){
-			if(n == 1) return false;
+			if(n < 2) return false;
 			else if(n == 2 || n == 3) return true;
-			for(int i = 2; i * i <= n; i ++)
+			for(int i = 2; i <= n / i; i ++)
 				if(n % i == 0) return false;
 			return true;
 		}
@@ -14,42 +16,45 @@ class PrimeNumber{
 	public:
 		PrimeNumber(){prime = 1;}
 		PrimeNumber(int n){
-			while(!isPrime(n)) n --;
+			while(n > 1 && !isPrime(n)) n --;
+            if(n < 1) n = 1;
 			prime = n;
 		}
 
 		void setPrime(int n){
-			while(!isPrime(n)) n --;
+			while(n > 1 && !isPrime(n)) n --;
+            if(n < 1) n = 1;
 			prime = n;
 		}
 		int getPrime() const{return prime;}
 
 		PrimeNumber operator ++(){
+			if(prime == std::numeric_limits<int>::max()) throw std::overflow_error("No larger int prime.");
 			prime ++;
 			while(!isPrime(prime)) prime ++;
 			return *this;
 		}
 		PrimeNumber operator ++(int){
-			int t = prime;
+			PrimeNumber previous(*this);
+			if(prime == std::numeric_limits<int>::max()) throw std::overflow_error("No larger int prime.");
 			prime ++;
 			while(!isPrime(prime)) prime ++;
-			return PrimeNumber(t);
+			return previous;
 		}
 		PrimeNumber operator --(){
-			prime --;
-			while(!isPrime(prime) && prime >= 2) prime --;
+			if(prime > 1) prime --;
+			while(prime >= 2 && !isPrime(prime)) prime --;
 			return *this;
 		}
 		PrimeNumber operator --(int){
-			int t = prime;
-			prime --;
-			while(!isPrime(prime) && prime >= 2) prime --;
-			return PrimeNumber(t);
+			PrimeNumber previous(*this);
+			if(prime > 1) prime --;
+			while(prime >= 2 && !isPrime(prime)) prime --;
+			return previous;
 		}
 		friend istream& operator >>(istream& ip, PrimeNumber& p){
 			int n;
-			ip >> n;
-			p.setPrime(n);
+			if(ip >> n) p.setPrime(n);
 			return ip;
 		}
 		friend ostream& operator <<(ostream& op, const PrimeNumber& p){

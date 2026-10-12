@@ -14,7 +14,7 @@ namespace SavitchEmployees{
             string supervisorName;
         public:
             Administrator();
-            Administrator(const string& theName, const string& theNumber, double theWeeklyPay, const string& adminTitle, const string& responsibility, const string& supervisorName);
+            Administrator(const string& theName, const string& theNumber, double theAnnualSalary, const string& adminTitle, const string& responsibility, const string& supervisorName);
             void setSupervisor(const string& supervisorName);
             void inputAdministratorData();
             void print() const;

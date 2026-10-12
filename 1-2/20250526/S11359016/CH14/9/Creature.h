@@ -15,6 +15,10 @@ class Creature{
         Creature();
         Creature(int newStrengh, int newHit);
         int getDamage();
+        int getStrength() const { return strength; }
+        void setStrength(int value) { if(value > 0) strength = value; }
+        int getHitpoints() const { return hitpoints; }
+        void setHitpoints(int value) { hitpoints = value; }
 };
 
 #endif

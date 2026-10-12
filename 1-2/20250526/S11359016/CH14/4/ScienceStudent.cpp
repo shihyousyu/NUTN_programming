@@ -9,7 +9,7 @@ using std::cout;
 
 ScienceStudent::ScienceStudent() : scienceDiscipline(""), course(""){}
 ScienceStudent::ScienceStudent(string d, string c) : scienceDiscipline(d), course(c){}
-ScienceStudent::ScienceStudent(const ScienceStudent& t){
+ScienceStudent::ScienceStudent(const ScienceStudent& t) : Student(t){
     scienceDiscipline = t.scienceDiscipline;
     course = t.course;
     UniversityName = t.UniversityName;
@@ -29,6 +29,7 @@ ScienceStudent& ScienceStudent::operator=(const ScienceStudent& rtSide){
     UniversityName = rtSide.UniversityName;
     RegistrationNumber = rtSide.RegistrationNumber;
     proctor = rtSide.proctor;
+    return *this;
 }
 
 istream& operator>>(istream& inStream, ScienceStudent& scienceStudentObject){

@@ -11,7 +11,7 @@ Elf::Elf(){
 }
 
 Elf::Elf(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 

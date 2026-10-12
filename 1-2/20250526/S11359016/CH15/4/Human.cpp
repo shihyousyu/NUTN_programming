@@ -11,7 +11,7 @@ Human::Human(){
 }
 
 Human::Human(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 

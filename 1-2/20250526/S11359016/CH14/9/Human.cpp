@@ -10,14 +10,13 @@ Human::Human(){
     hitpoints = 10;
 }
 Human::Human(int newStrength, int newHit){
-    strength = newStrength;
+    strength = newStrength > 0 ? newStrength : 10;
     hitpoints = newHit;
 }
 
 int Human::getDamage(){
     int damage;
-    srand(time(NULL));
-    damage = (rand() % strength) + 1;
+    damage = Creature::getDamage();
     cout << getSpecies() << " attacks for " << damage << " points!\n";
     return damage;
 }
