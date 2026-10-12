@@ -23,13 +23,13 @@ public class App extends Frame implements ActionListener, MouseListener, MouseMo
     static MenuItem ovalMI = new MenuItem("Oval");
     static MenuItem rectangleMI = new MenuItem("Rectangle");
     static MenuItem selectMI = new MenuItem("Select");
-    static MenuItem resizeMI = new MenuItem("Resizee");
+    static MenuItem resizeMI = new MenuItem("Resize");
 
     private int mode = 0;
     private String nowGraphic = "";
 
     private int posX, posY, startX, startY, endX, endY, W, H;
-    private int newX, newY, newStartX, newStartY, newEndX, newEndY;
+    private boolean selected;
     private int dx, dy, start_dx, start_dy, end_dx, end_dy;
 
     public static void main(String[] args){
@@ -71,6 +71,8 @@ public class App extends Frame implements ActionListener, MouseListener, MouseMo
         else if(mi == selectMI) mode = SELECT;
         else if(mi == resizeMI) mode = RESIZE;
         else mode = 0;
+        selected = false;
+        repaint();
     }
 
     private boolean isDrawMode(int mode) {return mode == DRAW_STRAIGHT_LINE || mode == DRAW_OVAL || mode == DRAW_RECTANGLE;}
@@ -79,18 +81,23 @@ public class App extends Frame implements ActionListener, MouseListener, MouseMo
         if(isDrawMode(mode)) {
             startX = e.getX();
             startY = e.getY();
+            endX = startX;
+            endY = startY;
+            updateBounds();
             if(mode == DRAW_STRAIGHT_LINE) nowGraphic = STRAIGHT_LINE;
             else if(mode == DRAW_OVAL) nowGraphic = OVAL;
             else if(mode == DRAW_RECTANGLE) nowGraphic = RECTANGLE;
             repaint();
         }
         else if(mode == SELECT) {
+            selected = !nowGraphic.isEmpty() && hitTest(e.getX(), e.getY());
             dx = e.getX() - posX;
             dy = e.getY() - posY;
             start_dx = e.getX() - startX;
             start_dy = e.getY() - startY;
             end_dx = e.getX() - endX;
             end_dy = e.getY() - endY;
+            repaint();
         }
     }
     public void mouseDragged(MouseEvent e) {
@@ -104,48 +111,45 @@ public class App extends Frame implements ActionListener, MouseListener, MouseMo
             repaint();
         }
 
-        else if(mode == SELECT) {
-            newX = e.getX() - dx;
-            newY = e.getY() - dy;
-            newStartX = e.getX() - start_dx;
-            newStartY = e.getY() - start_dy;
-            newEndX = e.getX() - end_dx;
-            newEndY = e.getY() - end_dy;
-            if(dx > 0 && dx < W && dy > 0 && dy < H)
-                repaint();
+        else if(mode == SELECT && selected) {
+            startX = e.getX() - start_dx;
+            startY = e.getY() - start_dy;
+            endX = e.getX() - end_dx;
+            endY = e.getY() - end_dy;
+            updateBounds();
+            repaint();
         }
     }
 
-    public void paint(Graphics g) {
-        if(isDrawMode(mode) || mode == RESIZE){
-            if(nowGraphic == STRAIGHT_LINE) g.drawLine(startX, startY, endX, endY);
-            else if(nowGraphic == OVAL) { g.setColor(Color.RED); g.fillOval(posX, posY, W, H);}
-            else if(nowGraphic == RECTANGLE) { g.setColor(Color.YELLOW); g.fillRect(posX, posY, W, H);}
-        }
-        else if(mode == SELECT) {
-            posX = newX;
-            posY = newY;
-            startX = newStartX;
-            startY = newStartY;
-            endX = newEndX;
-            endY = newEndY;
+    private void updateBounds(){
+        posX = Math.min(startX, endX);
+        posY = Math.min(startY, endY);
+        W = Math.abs(startX - endX);
+        H = Math.abs(startY - endY);
+    }
 
-            if(nowGraphic == STRAIGHT_LINE) g.drawLine(startX, startY, endX, endY);
-            else if(nowGraphic == OVAL) { g.setColor(Color.RED); g.fillOval(posX, posY, W, H);}
-            else if(nowGraphic == RECTANGLE) { g.setColor(Color.YELLOW); g.fillRect(posX, posY, W, H);}
-        }
-        if(mode == SELECT || mode == RESIZE) {
-            g.setColor(Color.BLACK);
-            Graphics2D g2d = (Graphics2D) g.create();
-            Stroke dashed = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0);
-            g2d.setStroke(dashed);
-            g2d.drawRect(posX, posY, W, H);
-            g2d.dispose();
+    private boolean hitTest(int x, int y){
+        if(nowGraphic.equals(STRAIGHT_LINE))
+            return java.awt.geom.Line2D.ptSegDist(startX, startY, endX, endY, x, y) <= 5;
+        return x >= posX && x <= posX + W && y >= posY && y <= posY + H;
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        if(nowGraphic.equals(STRAIGHT_LINE)){g.setColor(Color.BLACK); g.drawLine(startX, startY, endX, endY);}
+        else if(nowGraphic.equals(OVAL)){g.setColor(Color.RED); g.fillOval(posX, posY, W, H);}
+        else if(nowGraphic.equals(RECTANGLE)){g.setColor(Color.YELLOW); g.fillRect(posX, posY, W, H);}
+        if((mode == SELECT && selected) || (mode == RESIZE && !nowGraphic.isEmpty())) {
+            Graphics2D dashed = (Graphics2D)g.create();
+            dashed.setColor(Color.BLACK);
+            dashed.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{9}, 0));
+            dashed.drawRect(posX, posY, W, H);
+            dashed.dispose();
         }
     }
 
     public void mouseMoved(MouseEvent e) {}
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {mouseDragged(e);}
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
     public void mouseClicked(MouseEvent e) {}

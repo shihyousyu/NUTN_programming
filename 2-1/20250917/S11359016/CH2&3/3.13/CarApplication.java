@@ -12,7 +12,7 @@ public class CarApplication{
         System.out.print("Year: ");
         year = input.nextLine();
         System.out.print("Price: ");
-        price = input.nextFloat();
+        price = input.nextDouble();
 
         Car car = new Car(model, year, price);
         return car;

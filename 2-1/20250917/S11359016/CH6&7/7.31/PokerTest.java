@@ -51,10 +51,34 @@ public class PokerTest{
             return "High Card";
     }
 
-    private static int compare(Card[] h1, Card[] h2){
-        int r1 = rankValue(h1);
-        int r2 = rankValue(h2);
-        return Integer.compare(r1, r2);
+    // Category first; within a category compare groups, then kickers.
+    static int compare(Card[] h1, Card[] h2){
+        int[] first = comparisonKey(h1);
+        int[] second = comparisonKey(h2);
+        for(int i = 0; i < first.length; ++i){
+            int result = Integer.compare(first[i], second[i]);
+            if(result != 0) return result;
+        }
+        return 0;
+    }
+
+    static int[] comparisonKey(Card[] hand){
+        int[] counts = new int[15];
+        for(Card card : hand) counts[DeckOfCards.faceValue(card.getFace())]++;
+        int category = rankValue(hand);
+        int[] key = new int[6];
+        key[0] = category;
+        if(category == 9 || category == 5){
+            int high = 14;
+            while(counts[high] == 0) high--;
+            key[1] = high == 14 && counts[2] == 1 ? 5 : high;
+        }else{
+            int pos = 1;
+            for(int count = 4; count >= 1; --count)
+                for(int value = 14; value >= 2; --value)
+                    if(counts[value] == count) key[pos++] = value;
+        }
+        return key;
     }
 
     private static int rankValue(Card[] hand){

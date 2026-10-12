@@ -23,4 +23,9 @@ public class ROLE {
     public String toString() {
         return "Name: "+name+"  Life: "+life+"  Magic: "+magic;
     }
+    public void Drink(Drug drug){
+        if(drug instanceof RedDrug) life += ((RedDrug)drug).addLife;
+        else if(drug instanceof BlueDrug) magic += ((BlueDrug)drug).addMagic;
+    }
+
 }

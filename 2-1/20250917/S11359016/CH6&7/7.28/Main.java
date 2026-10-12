@@ -28,10 +28,14 @@ public class Main{
     public static void PrintTrack(int tortoise, int hare){
         StringBuilder track = new StringBuilder();
 
-        for(int i = 0; i <= 70; i++){
+        tortoise = Math.min(tortoise, 70);
+        hare = Math.min(hare, 70);
+        for(int i = 1; i <= 70; i++){
             if(i == tortoise && i == hare){
-                track.append("OUCH!!!");
-                i += 6;
+                String bite = "OUCH!!!";
+                int length = Math.min(bite.length(), 71 - i);
+                track.append(bite, 0, length);
+                i += length - 1;
             }
             else if(i == tortoise)
                 track.append("T");

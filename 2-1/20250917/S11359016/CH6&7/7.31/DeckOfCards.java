@@ -40,7 +40,7 @@ public class DeckOfCards{
         return hand;
     }
 
-    private static int faceValue(String face){
+    public static int faceValue(String face){
         switch(face){
             case "Ace": return 14;
             case "King": return 13;
@@ -106,6 +106,7 @@ public class DeckOfCards{
             values[i] = faceValue(hand[i].getFace());
         Arrays.sort(values);
 
+        if(Arrays.equals(values, new int[]{2, 3, 4, 5, 14})) return true;
         for(int i = 0; i < 4; i++)
             if(values[i + 1] - values[i] != 1)
                 return false;

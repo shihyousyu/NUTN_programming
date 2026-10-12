@@ -21,6 +21,6 @@ public class Priest extends ROLE{
 
     @Override
     public String toString() {
-        return "Witch - " + super.toString();
+        return "Priest - " + super.toString();
     }
 }

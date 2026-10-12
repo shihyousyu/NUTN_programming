@@ -13,6 +13,7 @@ public class Witch extends ROLE implements MagicRecoverable {
 
         if (r instanceof Warrior) r.life-=40;
         else if (r instanceof Witch) r.life-=60;
+        else if (r instanceof Priest) r.life-=50;
 
         if (r.life<=0)
             System.out.println(r.getName() + " is died!");

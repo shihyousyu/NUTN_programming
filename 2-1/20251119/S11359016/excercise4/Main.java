@@ -33,6 +33,26 @@ public class Main {
                 System.out.println("Battle ended.");
                 break;
             }
+            recoverWithDrugs(a, r);
+            recoverWithDrugs(b, r);
         }
     }
+    static void recoverWithDrugs(ROLE role, SecureRandom random){
+        if(role.getLife() < 100){
+            String size = randomSize(random);
+            if(size != null) role.Drink(new RedDrug(size));
+        }
+        if(role.getMagic() < 70){
+            String size = randomSize(random);
+            if(size != null) role.Drink(new BlueDrug(size));
+        }
+    }
+    static String randomSize(SecureRandom random){
+        int value = random.nextInt(100);
+        if(value < 10) return "Large";
+        if(value < 40) return "Medium";
+        if(value < 80) return "Small";
+        return null;
+    }
+
 }
