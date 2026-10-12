@@ -33,7 +33,7 @@ int main() {
         if (index1 == -1) printf("Invalid color: %s\n", band1);
         else if (index2 == -1) printf("Invalid color: %s\n", band2);
         else if (index3 == -1) printf("Invalid color: %s\n", band3);
-        else printf("Resistance value: %.f kilo-ohms\n", (index1 * 10 + index2) * pow(10, index3));
+        else printf("Resistance value: %.3f kilo-ohms\n", (index1 * 10 + index2) * pow(10, index3) / 1000.0);
 
         printf("Do you want to decode another resistor? (y/n)\n=> ");
         scanf(" %c", &choice);

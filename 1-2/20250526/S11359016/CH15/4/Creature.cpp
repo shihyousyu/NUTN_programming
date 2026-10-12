@@ -5,8 +5,8 @@ using std::string;
 using std::cout;
 
 Creature::Creature(){
-    strength = 0;
-    hitpoints = 0;
+    strength = 10;
+    hitpoints = 10;
 }
 Creature::Creature(int newStrength, int newHit){
     strength = newStrength;

@@ -12,8 +12,7 @@ public class Car{
 
     public void setModel(String m){model = m;}
     public void setYear(String y){year = y;}
-    public void setPrice(double p){price = p;}
-
+    public void setPrice(double p) {if(p > 0) price = p;}
     public String getModel(){return model;}
     public String getYear(){return year;}
     public double getPrice(){return price;}

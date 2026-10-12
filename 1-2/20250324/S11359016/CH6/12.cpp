@@ -28,7 +28,7 @@ int main(){
     for(int i = 0; i < 5; i++) getline(file, p[i]);
     file.close();
     
-    BoxOfProduce box(p[1], p[2], p[3]);
+    BoxOfProduce box(p[rand() % 5], p[rand() % 5], p[rand() % 5]);
     box.display();
 
     int cnt;

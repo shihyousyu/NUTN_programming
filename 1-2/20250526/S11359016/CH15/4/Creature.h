@@ -18,6 +18,9 @@ class Creature{
         virtual int getDamage();
         virtual string getSpecies();
         
+        int getStrength() const {return strength;}
+        void setStrength(int value) {strength = value;}
+        
         void setHitpoints(int newHitpoints);
         int getHitpoints() const{return hitpoints;}
 };

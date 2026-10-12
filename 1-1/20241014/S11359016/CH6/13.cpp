@@ -2,12 +2,12 @@
 #include<stdio.h>
 #include <ctype.h>
 
-const char build_num = 1;
-const char build_id = 2;
-const char number = 3;
-const char identifier = 4;
-const char start = 5;
-const char stop = 6;
+typedef enum{
+    build_num, build_id, number, identifier, start, stop,
+    build_sign, build_frac
+} state_t;
+
+state_t transition(state_t current_state, char transition_char);
 
 char transition(char current_state, char transition_char){
     if(current_state == start){
@@ -34,7 +34,8 @@ char transition(char current_state, char transition_char){
 }
 
 int main(){
-    char current_state, transition_char;
+    state_t current_state;
+    char transition_char;
     printf("Enter the data :");
     current_state = start;
     do{

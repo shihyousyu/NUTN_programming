@@ -4,9 +4,11 @@
 int fget_point_mass(FILE *input, int max, double location[10][3], double mass[10]){
     int n;
     if(fscanf(input, "%d", &n) != 1 || n < 3 || n > max) return 0;
-    for(int i = 0; i < n; i ++)
-        for(int j = 0; j < 3; j ++)
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < 3; j++)
             if(fscanf(input, "%lf", &location[i][j]) != 1) return 0;
+        if(fscanf(input, "%lf", &mass[i]) != 1) return 0;
+    }
     
     for(int i = 0; i < n; i ++)
         if(fscanf(input, "%lf", &mass[i]) != 1) return 0;

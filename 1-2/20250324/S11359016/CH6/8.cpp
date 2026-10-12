@@ -15,7 +15,7 @@ class Money{
         int getDollar() const{return dollar;}
         int getCent() const{return cent;}
 
-        int getAmount() const{return (dollar + cent / 100.0);}
+        double getAmount() const{return (dollar + cent / 100.0);}
 };
 
 int main(){

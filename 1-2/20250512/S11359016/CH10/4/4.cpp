@@ -41,11 +41,16 @@ class Subscriber{
         ~Subscriber(){delete [] channelList;}
 
         void setName(string n){name = n;}
-        
+
         string getName() const{return name;}
         int getNumChannels() const{return numChannels;}
         string* getChannelList() const{return channelList;}
 
+        void inputSubscriber() {
+            getline(cin >> ws, name);
+            resetChannels();
+            handleChannels();
+        }
         void outputSubscriber(){
             cout << "\nSubscriber " << name << ":\n";
             cout << "\tnumChannels: " << numChannels << ".\n";

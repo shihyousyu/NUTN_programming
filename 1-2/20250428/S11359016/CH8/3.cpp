@@ -36,11 +36,13 @@ class Complex{
             ip >> c.real >> c.imaginary;
             return ip;
         }
-        friend ostream& operator <<(ostream& op, Complex& c){
+        friend ostream& operator <<(ostream& op, const Complex& c) {
             op << c.real << (c.imaginary >= 0 ? "+" : "-") << fabs(c.imaginary) << "i";
             return op;
         }
 };
+
+const Complex i(0, 1);
 
 int main(){
     Complex c1, c2, c3;

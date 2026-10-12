@@ -3,15 +3,14 @@
 #include<math.h>
 #include<string.h>
 
-void charges(double hours_used, double *ptr_total_charge, double *ptr_charge_per_hour, double *ptr_average_cost){
-    if(hours_used <= 10) *ptr_total_charge = 7.99;
-    else{
-        *ptr_total_charge = 7.99 + (int)(hours_used - 10) * 1.99;
-        if(hours_used - 10 - (int)(hours_used - 10) != 0) *ptr_total_charge = *ptr_total_charge + 1.99;
-    }
-
-    *ptr_charge_per_hour = round(*ptr_total_charge * 100) / 100;
-    *ptr_average_cost = round(*ptr_total_charge / hours_used * 100) / 100;
+double round_money(double amount) {
+    return round(amount * 100) / 100;
+}
+void charges(double hours, double *total, double *average) {
+    if(hours <= 10) *total = 7.99;
+    else *total = 7.99 + ceil(hours - 10) * 1.99;
+    *total = round_money(*total);
+    *average = round_money(*total / hours);
 }
 
 int main(){
@@ -45,7 +44,7 @@ int main(){
     ptr_average_cost = &average_cost;
 
     while(fscanf(input_file, "%d%lf", &customer_number, &hours_used) != EOF){
-        charges(hours_used, ptr_total_charge, ptr_charge_per_hour, ptr_average_cost);
+        charges(hours_used, &total_charge, &average_cost);
         fprintf(output_file, "%d\t\t%.1f\t\t%.2f\t\t%.2f\n", customer_number, hours_used, charge_per_hour, average_cost);
     }
     fclose(input_file);

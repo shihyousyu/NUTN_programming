@@ -16,7 +16,7 @@ Cyberdemon::Cyberdemon(int newStrength, int newHit){
 }
 
 int Cyberdemon::getDamage(){
-    int damage;
+    int damage = Creature::getDamage();
     srand(time(NULL));
     damage = (rand() % strength) + 1;
     cout << getSpecies() << " attacks for " << damage << " points!\n";

@@ -11,14 +11,21 @@ class MyInteger{
 
         void setNum(int n){
             num.clear();
-            while(n != 0){
+            do{
                 num.push_back(n % 10);
                 n /= 10;
-            }
+            } while(n != 0);
+        }
+
+        int getNum() const {
+            int value = 0;
+            for(int j = static_cast<int>(num.size()) - 1; j >= 0; --j)
+                value = value * 10 + num[j];
+            return value;
         }
         
         int operator [](int index){return index >= num.size() ? -1 : num[index];}
-        friend istream& operator >>(istream& ip, MyInteger n){
+        friend istream& operator >>(istream& ip, MyInteger& n){
             int t;
             ip >> t;
             n.setNum(t);

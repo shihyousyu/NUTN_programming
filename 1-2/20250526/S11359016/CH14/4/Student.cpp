@@ -25,6 +25,7 @@ Student& Student::operator=(const Student& rtSide){
     UniversityName = rtSide.UniversityName;
     RegistrationNumber = rtSide.RegistrationNumber;
     proctor = rtSide.proctor;
+    return *this;
 }
 istream& operator>>(istream& inStream, Student& studentObject){
     cout << "University: ";

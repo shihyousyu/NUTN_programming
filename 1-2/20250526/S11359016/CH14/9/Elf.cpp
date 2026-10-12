@@ -15,7 +15,7 @@ Elf::Elf(int newStrength, int newHit){
 }
 
 int Elf::getDamage(){
-    int damage;
+    int damage = Creature::getDamage();
     srand(time(NULL));
     damage = (rand() % strength) + 1;
     cout << getSpecies( ) << " attacks for " << damage << " points!\n";

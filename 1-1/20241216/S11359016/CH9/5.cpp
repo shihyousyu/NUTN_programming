@@ -44,7 +44,7 @@ int main(){
     int path[8 * 8][2];
     int pathLength = 0;
 
-    if(dfs(maze, 0, 0, visited, path, &pathLength)){
+    if(dfs(maze, 0, 1, visited, path, &pathLength)){
         printf("find a route:\n");
         for(int i = 0; i < pathLength; i++) printf("(%d, %d)\n", path[i][0], path[i][1]);
     }
