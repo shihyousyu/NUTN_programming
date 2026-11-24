@@ -23,22 +23,19 @@ void compute(int A[4][5], double t[4], double* grandtotal){
 }
 
 void compare(double t[4], double *grandtotal){
-    int max = 0, secMax = 0;
-    int id_max = -1, id_secMax = -1;
-    for(int i = 0; i < 4; i ++){
-        if(t[i] > max){
+    int max = -1, secMax = -1;
+
+    for(int i = 0; i < 4; i++){
+        if(max == -1 || t[i] > t[max]){
             secMax = max;
-            id_secMax = id_max;
-            max = t[i];
-            id_max = i;
+            max = i;
         }
-        else if(t[i] > secMax){
-            secMax = t[i];
-            id_secMax = i;
-        }
+        else if(secMax == -1 || t[i] > t[secMax])
+            secMax = i;
     }
-    if(max / *grandtotal > 0.5) printf("candidate %c is the winner.\n", 'A' + id_max);
-    else printf("Runoff required between Candidate %c and Candidate %c.\n", 'A' + id_max, 'A' + id_secMax);
+
+    if(t[max] / *grandtotal > 0.5) printf("candidate %c is the winner.\n", 'A' + max);
+    else printf("Runoff required between Candidate %c and Candidate %c.\n", 'A' + max, 'A' + secMax);
 }
 
 int main(){
